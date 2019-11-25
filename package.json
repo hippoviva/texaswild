@@ -1,0 +1,20 @@
+{
+  "name": "22",
+  "version": "1.0.0",
+  "description": "Texas Wildlife",
+  "main": "index.js",
+  "scripts": {
+    "start": "index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "bsC3",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nedb": "^1.8.0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.1"
+  }
+}
