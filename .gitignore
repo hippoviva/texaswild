@@ -2,3 +2,7 @@ node_modules/
 .env
 .DS_Store
 Stupid.code-workspace
+arraysOfNames.js
+database.db copy
+sketch.js
+all.html

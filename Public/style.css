@@ -1,0 +1,173 @@
+.ps {
+    margin: 0;
+}
+
+html {
+    background-color: black;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    color: white;
+    background-color: black;
+    border-width: 4px;
+    border-color: grey;
+}
+
+select {
+    color: white;
+    background-color: black;
+    border-width: 4px;
+    border-color: grey;
+}
+
+.header2 {
+    text-align: center;
+    background-color: black;
+    color: white;
+
+}
+
+.welcome {
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-top: 90px;
+}
+
+.select-wrapper {
+    text-align: center;
+}
+
+.master {
+    text-align: center;
+    background-color: lightgray;
+}
+
+
+.sp_picturesDiv {
+    display: inline-block;
+    width: 100;
+
+    padding: 5px;
+    background-color: black;
+    color: white;
+    margin: 5px;
+    overflow: auto;
+    z-index: 10;
+}
+
+
+.pictureOfOrg {
+    display: inline-block;
+    margin: 0 auto;
+    max-width: 100%;
+    border-width: 5px;
+    height: auto;
+    width: auto;
+    padding-right: 0px;
+}
+
+.attri {
+    font-size: 75%;
+    white-space: nowrap;
+    color: white;
+    text-align: center;
+
+}
+
+/* Style the header */
+.header {
+    position: fixed;
+    top: 0;
+    background: #555;
+    color: red;
+    margin-top: 0;
+    padding-left: 5px;
+    width: 97vw;
+    padding-bottom: 4px;
+    z-index: 100;
+    overflow: auto;
+}
+
+.links {
+    color: white;
+}
+
+
+/* Page content */
+.content {
+    display: grid;
+    padding: 16px;
+    text-align: center;
+    top: 50px;
+    margin-top: 80px;
+    color: blue;
+    background-color: rgb(77, 23, 23);
+    padding: 10px;
+    margin-left: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+
+}
+
+.displayClass {
+    display: none;
+}
+
+/*
+#iframe1 {
+    position: fixed;
+    margin-top: 0;
+    margin: 100px;
+    top: 0;
+    left: auto;
+    bottom: 0;
+    right: auto;
+
+
+    width: 640px;
+    height: 480px;
+    border: 3px solid #73AD21;
+
+    z-index: 100
+}
+
+/*
+.container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
+.item {
+    width: 10em;
+}
+
+.new {
+    position: relative;
+    z-index: 20;
+}
+
+#iframe1 {
+    position: fixed;
+    top: 20vh;
+    left: 5vw;
+    width: 80%;
+    height: 60vh;
+    border: 3px solid #73AD21;
+    z-index: 30;
+}

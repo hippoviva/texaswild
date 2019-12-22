@@ -1,16 +1,162 @@
-// Copyritght Brooks Smith 2019
-// MIT License  - Have fun.
 let dbObject = {};
-const loadData = document.getElementById("loadData");
-loadData.addEventListener("click", async event => {
-    const response = await fetch("/sciNames")
-    const json = await response.json()
-    //   console.log(json);
-    loadOp(json);
-    dbObject = json;
-    //  console.log(dbObject);
+
+
+const toggleView = document.getElementById("toggleView");
+toggleView.addEventListener('click', event => {
+    if (toggleView.textContent == "Main") {
+        let code2 = window.prompt("Enter Admin Passcode", "1234");
+        if (code2 === "pppp") {
+            toggleView.textContent = "Edit"
+            document.getElementById('masterView').className = "displayClass";
+            document.getElementById('editView').className = "";
+
+        } else {
+            window.alert("That was not correct")
+        }
+
+    } else {
+        toggleView.textContent = "Main"
+        document.getElementById("masterView").className = ""
+        document.getElementById("editView").className = "displayClass";
+    }
 
 });
+
+(async function loadSelectForEdit() {
+    const response = await fetch("/sciNames")
+    const json = await response.json()
+    loadOp(json);
+    dbObject = json;
+
+}());
+
+
+(async function loadAllPictures() {
+    let dBdata = await dataFind()
+    dBdata.sort(function (a, b) {
+        var textA = a.name.toLowerCase();
+        var textB = b.name.toLowerCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+    makeDom(dBdata);
+})();
+
+
+const getKingdom = document.getElementById("selectKingdom");
+getKingdom.addEventListener('change', event => {
+    let strUser = selectKingdom.options[selectKingdom.selectedIndex].text;
+    hidePictures(strUser);
+});
+
+function hidePictures(strUser) {
+    const hidden = document.getElementsByClassName("sp_picturesDiv");
+    //This part hides the pictures and puts them back
+    for (let i = 0; i < hidden.length; i++) {
+        let regex = RegExp(strUser);
+
+        if (
+            regex.test(document.getElementById(hidden[i].id).className) ==
+            true || strUser == "All"
+        ) {
+            document.getElementById(
+                    hidden[i].id
+                ).className = document
+                .getElementById(hidden[i].id)
+                .className.replace(/(?:^|\s)displayClass(?!\S)/g, "");
+        } else {
+            document.getElementById(hidden[i].id).className += " displayClass";
+
+        }
+    }
+}
+
+async function dataFind() {
+    const api_url = "/dataFind";
+    const dbData = await fetch(api_url);
+    const json = await dbData.json();
+    const arrayofData = Object.values(json);
+    return arrayofData;
+};
+
+const makeDom = function (input) {
+    const myDiv = document.getElementById("myDiv");
+    const inputArr = input;
+    for (let i = 0; i < inputArr.length; i++) {
+        const attributeString =
+            "inlineBlock" +
+            " " +
+            "sp_picturesDiv" +
+            " " +
+            inputArr[i].kingdom;
+
+        if (inputArr[i].license == undefined) {
+            inputArr[i].attrLicense = "---";
+        }
+
+        const root = document.createElement("div");
+        const elemImg = document.createElement("img");
+        const elemName = document.createElement("p");
+        const elemCommonName = document.createElement("p");
+        const artist = document.createElement("p");
+
+        elemImg.setAttribute("src", "https://" + inputArr[i].imageURL.substring(1));
+        elemImg.setAttribute("class", "pictureOfOrg");
+        elemImg.setAttribute("name", i);
+        elemImg.frameSearchName = inputArr[i].name
+
+        artist.setAttribute("class", "attri");
+        root.id = "picture" + i;
+        elemName.textContent = inputArr[i].name;
+        if (inputArr[i].name == inputArr[i].commonName) {} else {
+            elemCommonName.textContent = inputArr[i].commonName;
+        }
+        if (inputArr[i].artist == undefined) {
+            artist.textContent = "No Artist Listed "
+        } else {
+            artist.textContent = "Image By: " + inputArr[i].artist.substring(0, 28) + " - ";
+        }
+
+        root.setAttribute("class", attributeString);
+        root.appendChild(elemImg);
+        root.appendChild(artist);
+        if (inputArr[i].license == "Public domain" || inputArr[i].license == "No restrictions" ||
+            inputArr[i].license == "---") {
+            const license = document.createElement("span");
+            license.setAttribute("class", "attri")
+            license.textContent = inputArr[i].license;
+            artist.appendChild(license);
+
+        } else {
+            const a = document.createElement('a');
+            a.setAttribute("href", inputArr[i].licenceUrl)
+            a.textContent = inputArr[i].license;
+            a.setAttribute("class", "attri");
+            artist.appendChild(a);
+        }
+        root.appendChild(elemCommonName);
+        root.appendChild(elemName);
+        myDiv.appendChild(root);
+        sleep("4");
+
+    }
+}
+
+const sleep = function (milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if (new Date().getTime() - start > milliseconds) {
+            break;
+        }
+    }
+};
+
+
+
+///below here is the edit code
+
+
+//const loadData = document.getElementById("loadData");
+//loadData.addEventListener("click", async event => {
 
 function loadOp(json) {
     json.sort(function (a, b) {
@@ -19,7 +165,6 @@ function loadOp(json) {
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
     const selects = json;
-    //   console.log(selects.length);
     const nameSelects = document.getElementById("nameSelect");
     for (let i = 0; i < selects.length; i++) {
         let option = document.createElement("option");
@@ -33,10 +178,10 @@ function loadOp(json) {
 const renderSelects = function (dataObj) {
     const nameSelector = document.getElementById("nameSelect");
     nameSelector.addEventListener("change", event => {
-        //    console.log(nameSelector.options[nameSelector.selectedIndex].value);
+
         let g = (dataObj[nameSelector.selectedIndex]);
         fillPage(g);
-        console.log(g);
+
         fillAttr(g);
 
     })
@@ -52,7 +197,6 @@ submitArtist.addEventListener("click", async event => {
         "artist": artist
     }
     const response = await updateSend(updateArtist);
-    //  console.log(dbObject.nameSelector)
     dbObject[document.getElementById("nameSelect").selectedIndex].artist = updateArtist.artist;
     document.getElementById("artistInput").value = "";
     document.getElementById("artistName").textContent = updateArtist.artist;
@@ -83,18 +227,11 @@ submitText.addEventListener("click", async event => {
         "name": nameSelector,
         "descriptionText": text
     }
-    console.log("update Description")
+
     const response = await updateSend(updateDescriptionText);
     dbObject[document.getElementById("nameSelect").selectedIndex].descriptionText = updateDescriptionText.descriptionText;
-    console.log(response) // document.getElementById("textArea").value = "";
     document.getElementById("textArea").textContent = updateDescriptionText.descriptionText;
 });
-
-
-
-
-
-
 
 
 
@@ -145,6 +282,7 @@ const fillPage = function (dataObj) {
 
     const elemImg = document.getElementById("picture");
     elemImg.setAttribute("src", "https://" + dataObj.imageURL.substring(2));
+    elemImg.frameSearchName = dataObj.name;
 
     const pictureURL = document.getElementById("pictureURL");
     pictureURL.textContent = dataObj.imageURL;
@@ -160,7 +298,6 @@ const fillPage = function (dataObj) {
 async function imageAttributes(dataObj) {
     const regexuse = /([^/]*[^/\d])\d*\.(jpg|JPG|png|jpeg|GIF|gif|PNG)/;
     let imageJPGName = dataObj.imageURL.substring(2).match(regexuse)[0];
-    //console.log(imageJPGName);
     const imageInfoURL = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File:" +
         imageJPGName + "&format=json";
 
@@ -281,7 +418,6 @@ async function updateSend(data) {
         body: JSON.stringify(data)
     };
     const api_url = "/update";
-    //  console.log(api_url, options);
     const response = await fetch(api_url, options);
     let json = await response.json();
     return json;
@@ -315,14 +451,12 @@ async function manyPost() {
     let rejects = [];
     for (let i = 0; i < parray.length; i++) {
         try {
-            console.log(parray[i]);
             let f = await scrapeMany(parray[i]);
-            //    console.log(f);
 
         } catch {
             err => console.error(err);
             rejects.push(parray[i]);
-            //      console.log('something');
+
         }
     }
     console.log(rejects);
@@ -349,8 +483,8 @@ const update = document.getElementById("updateDb");
 update.addEventListener("click", event => {
     let code2 = window.prompt("Input control code", "1234");
     if (code2 === "pppp") {
-        // console.log("Correct");
-        //  updateDb();
+
+        //  updateDb()
     } else {
         window.alert("That was wrong")
     }
@@ -361,16 +495,16 @@ async function updateDb() {
     let rejects = [];
     for (let i = 0; i < parray.length; i++) {
         try {
-            //console.log(parray[i], "howdy");
+
             let f = await updateSend({
                 "name": parray[i]
             });
-            //   console.log(f);
+
 
         } catch {
             err => console.error(err);
             rejects.push(parray[i]);
-            //  console.log('something');
+
         }
     }
     console.log(rejects);
@@ -381,7 +515,7 @@ button.addEventListener("click", event => {
     let x = ""
     let code = window.prompt("Input control code", "1234");
     if (code === "pppp") {
-        console.log("Correct");
+
         //    manyPost();
     } else {
         window.alert("That was wrong")
@@ -398,8 +532,10 @@ document
 
         } else {
             if (event.target.tagName.toLowerCase() == "img") {
-                const name = document.getElementById("scienName").textContent;
-                console.log(name);
+
+                //const name = document.getElementById("scienName");
+
+                const name = event.target.frameSearchName
                 iframeFromPic(name);
                 // checkForIphone(inputArr[pass].name);
 
@@ -414,7 +550,7 @@ function iframeFromPic(namePass) {
     let url = `https://en.wikipedia.org/wiki/${namePass}`;
 
     if (document.getElementById("iframe1") === null) {
-        console.log("here")
+
         let PicDiv = document.getElementById("mainPopPic"); //passedId);
         let ifrm = document.createElement("iframe");
         ifrm.setAttribute("src", url);
@@ -445,4 +581,5 @@ window.onkeyup = function (event) {
     }
 };
 
-//https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File:Opossum 2.jpg&format=json
+
+// hey();

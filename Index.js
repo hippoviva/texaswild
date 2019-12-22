@@ -1,11 +1,19 @@
 const express = require("express");
 const app = express();
 const Datastore = require("nedb");
+const cheerio = require("cheerio");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
+app.use(express.static("public"));
+app.use(
+    express.json({
+        limit: "1mb"
+    })
+);
+
 function notFound(req, res, next) {
-    res.static(404);
+    res.status(404);
     const error = new Error("Not Found");
     next(error);
 }
@@ -16,7 +24,7 @@ function errorHandler(error, req, res, next) {
         message: error.message
     });
 }
-app.use(notFound);
+//app.use(notFound);
 app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
@@ -33,17 +41,66 @@ app.use(
 const database = new Datastore("database.db");
 database.loadDatabase();
 
-app.get("/api", (req, res) => {
-    database.find({}, (err, data) => {
-        if (err) {
-            res.end();
-            return;
-        }
+
+
+app.post("/ap", async (req, res) => {
+    try {
+        console.log("add record request");
+        const data = req.body;
+        database.insert(data);
         res.json(data);
-    });
+    } catch {
+        err => console.error(err);
+    }
 });
 
-//dataDo  - Just do something with database
+app.post("/getwiki", async function (req, res, next) {
+    try {
+        console.log("get image.jpg request")
+        const sciName = req.body;
+        fetch("https://en.wikipedia.org/wiki/" + sciName.scientificName)
+            .then(res => res.text())
+            .then(body => {
+                const results = getImage(body);
+                res.json(results);
+            })
+            .catch(err => console.error(err));
+
+    } catch (error) {
+        // Passes errors into the error handler
+        return next(error)
+    }
+})
+
+
+function getImage(body) {
+    const $ = cheerio.load(body);
+    const imageURL = $("tbody tr:nth-child(2)", ".infobox")
+        .find("img")
+        .attr("src");
+    const commonName = $(".firstHeading").text();
+    return {
+        imageURL,
+        commonName
+    };
+}
+
+
+app.post("/getAttr", async (req, res) => {
+    try {
+        console.log("attribute request");
+        const data = req.body;
+        const response = await fetch(data.apiURL);
+        const attrData = await response.json()
+        //database.insert(data);
+        res.json(attrData);
+    } catch {
+        err => console.error(err);
+    }
+});
+
+
+//DATABASE WORK
 
 app.get("/dataFind", (request, response) => {
     try {
@@ -61,44 +118,45 @@ app.get("/dataFind", (request, response) => {
     }
 });
 
-app.get("/dataUrlChange", (request, response) => {
+
+app.post("/update", (request, response) => {
     try {
-        //let foundDoc;
-        console.log("I got a dataChange request");
-        database.find({}, (err, data) => {
-            if (err) {
-                response.end();
-                return;
-            }
+        console.log("update Request")
+        const updateResponse = update(request.body);
+        response.json(updateResponse);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+const update = async function (req) {
+    const selection = Object.keys(req)[1];
+
+    database.update({
+        name: req.name
+    }, {
+        $set: {
+            [selection]: req[selection]
+        }
+    }, {
+        multi: false
+    }, function (err, numReplaced) {
+        //        console.log(numReplaced);
+    })
+    return ("success");
+};
+
+
+app.get("/sciNames", (request, response) => {
+    try {
+        console.log("I got a dataFind request");
+        database.find({
+
+        }, function (err, data) {
+            //   console.log(data);
             response.json(data);
         });
     } catch (error) {
         console.log(error);
     }
 });
-
-//app.post("/wikipic", async (request, response) => {
-//  console.log("I got a multi  request!");
-//  const data = request.body;
-//  console.log(data);
-
-//  fetch(data.urlWikiPic)
-//    .catch(err => console.error(err))
-//    .then(res => res.text())
-//    .then(body => {
-//      //console.log(body, "body in wikipic");
-//      const results = useData(body);
-
-//      const info = addInfoToDb({
-//        results,
-//        data
-//      });
-
-//     response.json({
-//       results,
-//      info,
-//     status: "success"
-//   });
-//  })
-//   .catch(err => console.error(err));
-//});
