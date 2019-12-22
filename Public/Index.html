@@ -17,44 +17,42 @@
   <body>
     <div>
       <button id="toggleView">Main</button>
-    
     </div>
-    <div id = "mainPopPic"></div>
+    <div id="mainPopPic2"></div>
     <div id="editView" class="displayClass">
-      <p class = "header2">This is the edit view</p>
-      <div id="inputMasterDiv" >
-          <h2 class = "header2">Texas Wildlife</h2>
-          <div>
-            <button id="scrape">Scrape</button>
-          </div>
-          <div class = "displayClass">
-            <button id="updateDb">Update</button>
-          </div>
-      
-          <div class = "displayClass">
-            <button id="loadData" class="updatebtn">Load Data</button>
-          </div>
-          <div>
-            <input id="sciname" value="Ovis canadensis" />
-            <button id="submits" class = "displayClass">submit</button>
-          </div>
-      
-          <select id="nameSelect" class="select-group"> </select>
-          <div class="master">
-            <div id = "mainPopPic"></div>
+      <p class="header2">This is the edit view</p>
+      <div id="inputMasterDiv">
+        <h2 class="header2">Texas Wildlife</h2>
+        <div>
+          <button id="scrape">Scrape</button>
+        </div>
+        <div class="displayClass">
+          <button id="updateDb">Update</button>
+        </div>
+
+        <div class="displayClass">
+          <button id="loadData" class="updatebtn">Load Data</button>
+        </div>
+        <div>
+          <input id="sciname" value="Ovis canadensis" />
+          <button id="submits" class="displayClass">submits</button>
+        </div>
+
+        <select id="nameSelect" class="select-group"> </select>
+        <div class="master">
+          <div id="mainPopPic2"></div>
           <div id="pictureDiv">
             <img id="picture" />
           </div>
           <div><span id="scienName">hi</span></div>
-           
-            <div class = "displayClass">
-            
-             <p id="pictureURL" class="ps"></p>
-              <input id="pictureURLinput" value="" />
-              <button id="submitPictureURL">change</button>
-          
-            </div>
-          <div><span>Artist: </span>
+
+          <div class="displayClass">
+            <p id="pictureURL" class="ps"></p>
+            <input id="pictureURLinput" value="" />
+            <button id="submitPictureURL">change</button>
+          </div>
+          <div>
+            <span>Artist: </span>
             <span id="artistName" class="ps"></span>
             <input id="artistInput" value="" />
             <button id="submitArtist" class="updatebtn">change</button>
@@ -65,97 +63,44 @@
             <input id="licenseInput" value="" class="displayClass" />
             <button id="submitLicense" class="displayClass">change</button>
           </div>
-          <div><span>Common Name: </span>
+          <div>
+            <span>Common Name: </span>
             <span id="commonName" class="ps"></span>
             <input id="commonNameInput" value="" />
             <button id="submitCommmonName">change</button>
           </div>
           <div>
-          
-            <textarea id="textArea"
-              rows="5" cols="50"
-               minlength="10" maxlength="255">Write something here</textarea>
-        
-            <button id="submitText">change</button> 
+            <textarea
+              id="textArea"
+              rows="5"
+              cols="50"
+              minlength="10"
+              maxlength="255"
+            >
+Write something here</textarea
+            >
+
+            <button id="submitText">change</button>
           </div>
-      
         </div>
-     </div>
-     </div>
+      </div>
+    </div>
 
     <!-- below is the master view  -- above is the edit view 
     -->
     <div id="masterView" class="">
-      <div class = "header2">
-      <h2>Hi Sanchez Family!!</h2>
+      <div class="header2">
+        <h2>Hi Sanchez Family!!</h2>
 
-      <button id="getD" value="hey" class = "displayClass">get Data</button>
-      <select id="selectKingdom" class="select-group">
-        <option value="all">All</option>
-        <option value="Plantae">Plantae</option>
-        <option value="Animalia">Animalia</option>
-      </select>
+        <button id="getD" value="hey" class="displayClass">get Data</button>
+        <select id="selectKingdom" class="select-group">
+          <option value="all">All</option>
+          <option value="Plantae">Plantae</option>
+          <option value="Animalia">Animalia</option>
+        </select>
       </div>
       <div id="myDiv"></div>
-     </div>
-      <div id="inputMasterDiv" class = "displayClass">
-       <h2>Texas Wildlife</h2>
-        <div>
-          <button id="scrape">Scrape</button>
-         </div>
-      <div class = "displayClass">
-        <button id="updateDb">Update</button>
-      </div>
-
-      <div>
-         <button id="loadData" class="updatebtn">Load Data</button>
-       </div>
-       <div>
-          <input id="sciname" value="Ovis canadensis" />
-          <button id="submit">submit</button>
-       </div>
-
-    <select id="nameSelect" class="select-group"> </select>
-    <div class="master">
-     
-    <div id="pictureDiv">
-      <img id="picture" />
     </div>
-    <div><span id="scienName">hi</span></div>
-     
-    <div class = "displayClass">
-      
-    <p id="pictureURL" class="ps"></p>
-      <input id="pictureURLinput" value="" />
-      <button id="submitPictureURL">change</button>
-    
-    </div>
-    <div><span>Artist: </span>
-      <span id="artistName" class="ps"></span>
-      <input id="artistInput" value="" />
-      <button id="submitArtist" class="updatebtn">change</button>
-    </div>
-    <div>
-      <span>License: </span>
-      <span id="license" class="ps"><a id="a"></a></span>
-      <input id="licenseInput" value="" class="displayClass" />
-      <button id="submitLicense" class="displayClass">change</button>
-    </div>
-    <div><span>Common Name: </span>
-      <span id="commonName" class="ps"></span>
-      <input id="commonNameInput" value="" />
-      <button id="submitCommmonName">change</button>
-    </div>
-    <div>
-    
-    <textarea id="textArea"
-   rows="5" cols="50"
-   minlength="10" maxlength="255">Write something here</textarea>
-  
-   <button id="submitText">change</button> 
-  </div>
-  </div>
-
 
     <script src="all.js"></script>
   </body>

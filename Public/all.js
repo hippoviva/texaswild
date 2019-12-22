@@ -510,17 +510,17 @@ async function updateDb() {
     console.log(rejects);
 }
 
-const button = document.getElementById("submit");
-button.addEventListener("click", event => {
-    let x = ""
-    let code = window.prompt("Input control code", "1234");
-    if (code === "pppp") {
+//const button = document.getElementById("submit");
+//button.addEventListener("click", event => {
+//    let x = ""
+//    let code = window.prompt("Input control code", "1234");
+//    if (code === "pppp") {
 
-        //    manyPost();
-    } else {
-        window.alert("That was wrong")
-    }
-});
+//    manyPost();
+//    } else {
+//       window.alert("That was wrong")
+//   }
+//});
 
 document
     .querySelector("body")
