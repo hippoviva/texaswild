@@ -536,12 +536,27 @@ document
                 //const name = document.getElementById("scienName");
 
                 const name = event.target.frameSearchName
-                iframeFromPic(name);
-                // checkForIphone(inputArr[pass].name);
+                //  iframeFromPic(name);
+                checkForIphone(name);
 
             }
         }
     });
+
+
+function checkForIphone(namePass) {
+    let url = `https://en.wikipedia.org/wiki/${namePass}`;
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+
+        openAndReuseOneTabPerAttribute("myextension-myattribute", url);
+        //do nothing its an iphone some code
+    } // some code..
+    else {
+        //  openAndReuseOneTabPerAttribute("myextension-myattribute", url);
+        iframeFromPic(namePass);
+    }
+}
+
 
 
 
@@ -582,4 +597,24 @@ window.onkeyup = function (event) {
 };
 
 
+function openAndReuseOneTabPerAttribute(attrName, url) {
+    let windowObjectReference = null; // global variable
+
+    if (windowObjectReference == null || windowObjectReference.closed)
+    /* if the pointer to the window object in memory does not exist
+       or if such pointer exists but the window was closed */
+
+    {
+        windowObjectReference = window.open(url, "special page");
+        /* then create it. The new window will be created and
+           will be brought on top of any other window. */
+    } else {
+        windowObjectReference.focus();
+        /* else the window reference must exist and the window
+           is not closed; therefore, we can bring it back on top of any other
+           window with the focus() method. There would be no need to re-create
+           the window or to reload the referenced resource. */
+    };
+
+}
 // hey();
