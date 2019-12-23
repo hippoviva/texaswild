@@ -3,21 +3,24 @@ let dbObject = {};
 
 const toggleView = document.getElementById("toggleView");
 toggleView.addEventListener('click', event => {
-    if (toggleView.textContent == "Main") {
+    if (toggleView.textContent == "Edit") {
         let code2 = window.prompt("Enter Admin Passcode", "1234");
         if (code2 === "pppp") {
-            toggleView.textContent = "Edit"
+            toggleView.textContent = "Main"
             document.getElementById('masterView').className = "displayClass";
             document.getElementById('editView').className = "";
+            document.getElementById("onOffSelect").className = "displayClass";
 
         } else {
             window.alert("That was not correct")
         }
 
     } else {
-        toggleView.textContent = "Main"
-        document.getElementById("masterView").className = ""
+        toggleView.textContent = "Edit"
+        document.getElementById("masterView").className = "";
         document.getElementById("editView").className = "displayClass";
+        document.getElementById("onOffSelect").className = "";
+
     }
 
 });
@@ -56,7 +59,7 @@ function hidePictures(strUser) {
 
         if (
             regex.test(document.getElementById(hidden[i].id).className) ==
-            true || strUser == "All"
+            true || strUser == "Plant and Animal"
         ) {
             document.getElementById(
                     hidden[i].id

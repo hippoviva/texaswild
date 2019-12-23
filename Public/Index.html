@@ -15,14 +15,26 @@
   </head>
 
   <body>
-    <div>
-      <button id="toggleView">Main</button>
+    <div class="header">
+      <h2>Hi Steve B. & Nik & Lily!!</h2>
+      <span>
+        <button id="toggleView">Edit</button>
+        <button id="getD" value="hey" class="displayClass">get Data</button>
+        <span id="onOffSelect">
+          <select id="selectKingdom" class="select-group">
+            <option value="all">Plant and Animal</option>
+            <option value="Plantae">Plantae</option>
+            <option value="Animalia">Animalia</option>
+          </select>
+        </span>
+      </span>
     </div>
+
     <div id="mainPopPic"></div>
+    <!-- Edit View Page hidden initially follows-->
     <div id="editView" class="displayClass">
-      <p class="header2">This is the edit view</p>
+      <p>This is the edit view</p>
       <div id="inputMasterDiv">
-        <h2 class="header2">Texas Wildlife</h2>
         <div>
           <button id="scrape">Scrape</button>
         </div>
@@ -86,21 +98,11 @@ Write something here</textarea
       </div>
     </div>
 
-    <!-- below is the master view  -- above is the edit view 
+    <!-- below is the main view  -- above is the edit view 
     -->
-    <div id="masterView" class="">
-      <div class="header2">
-        <h2>Hi Sanchez Family!!</h2>
-
-        <button id="getD" value="hey" class="displayClass">get Data</button>
-        <select id="selectKingdom" class="select-group">
-          <option value="all">All</option>
-          <option value="Plantae">Plantae</option>
-          <option value="Animalia">Animalia</option>
-        </select>
-      </div>
-      <div id="myDiv"></div>
-    </div>
+    <span id="masterView" class="">
+      <div id="myDiv" class="content"></div>
+    </span>
 
     <script src="all.js"></script>
   </body>
