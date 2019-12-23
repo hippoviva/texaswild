@@ -1,4 +1,4 @@
-# Peojwxr Name: texaswild
+# Poject Name: texaswild
 Texas plants and animals
 Use the dropdown to choose between plants and animals
 
@@ -6,11 +6,11 @@ Use the dropdown to choose between plants and animals
 
 The project can be used by ranchers or other people outdoors to identify plants and animals.  Students will work collaboratively to research, draft and update the uses and description information for use in predator prey scenarios, and livestock forage applications.
 ## What is your motivation for creating this project?
-I rancher showed me a book on range plants and said it would be nice if he could look up the pictures on his phone to figre out what plants they were and if the plants were good wildlife or livestock forage.  Additionally I wanted my students to participate in creating the database as that would be more relevant activity for them to learn the energy flow learning objectives.
+A rancher showed me a book on range plants and said it would be nice if he could look up the pictures on his phone to figre out what plants they were and if the plants were good wildlife or livestock forage.  Additionally I wanted my students to participate in creating the database as that would be more relevant activity for them to learn the energy flow learning objectives.
 
 ## How will users interact with your web site?
 
-They can look at the pictures and them press on them for more information.  Additionally, the edit page will allow for users to update the descriptions.
+They can look at the pictures and then press on them for more information.  Additionally, the edit page will allow for users to update the descriptions.
 
 ## What 3rd Party API(s) will you integrate with?
 
