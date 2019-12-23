@@ -1,10 +1,11 @@
-# Poject Name: texaswild
+# Project Name: texaswild
 Texas plants and animals
 Use the dropdown to choose between plants and animals
 
 ## 2 - 3 Sentence Project Description (Elevator Pitch)
 
 The project can be used by ranchers or other people outdoors to identify plants and animals.  Students will work collaboratively to research, draft and update the uses and description information for use in predator prey scenarios, and livestock forage applications.
+
 ## What is your motivation for creating this project?
 A rancher showed me a book on range plants and said it would be nice if he could look up the pictures on his phone to figre out what plants they were and if the plants were good wildlife or livestock forage.  Additionally I wanted my students to participate in creating the database as that would be more relevant activity for them to learn the energy flow learning objectives.
 
@@ -28,6 +29,8 @@ node-fetch
 
 ## Will you try to implement any stretch features?
 
+Single HTML file for multiple views/pages
+Using grid
 * 
 
 ## What will be your process?
