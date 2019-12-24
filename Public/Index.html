@@ -3,12 +3,12 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js">
+<html class="no-js" lang="en">
   <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+    <title>Texas Wild</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
@@ -21,6 +21,7 @@
         <button id="toggleView">Edit</button>
         <button id="getD" value="hey" class="displayClass">get Data</button>
         <span id="onOffSelect">
+          <label for="selectKingdom">Choose-></label>
           <select id="selectKingdom" class="select-group">
             <option value="all">Plant and Animal</option>
             <option value="Plantae">Plantae</option>
@@ -46,7 +47,7 @@
           <button id="loadData" class="updatebtn">Load Data</button>
         </div>
         <div>
-          <input id="sciname" value="Ovis canadensis" />
+          <input id="sciname" type="text" value="Ovis canadensis" />
           <button id="submits" class="displayClass">submits</button>
         </div>
 
@@ -60,29 +61,35 @@
 
           <div class="displayClass">
             <p id="pictureURL" class="ps"></p>
-            <input id="pictureURLinput" value="" />
+            <input id="pictureURLinput" type="text" value="" />
             <button id="submitPictureURL">change</button>
           </div>
           <div>
             <span>Artist: </span>
             <span id="artistName" class="ps"></span>
-            <input id="artistInput" value="" />
+            <input id="artistInput" type="text" value="" />
             <button id="submitArtist" class="updatebtn">change</button>
           </div>
           <div>
             <span>License: </span>
             <span id="license" class="ps"><a id="a"></a></span>
-            <input id="licenseInput" value="" class="displayClass" />
+            <input
+              id="licenseInput"
+              type="text"
+              value=""
+              class="displayClass"
+            />
             <button id="submitLicense" class="displayClass">change</button>
           </div>
           <div>
             <span>Common Name: </span>
             <span id="commonName" class="ps"></span>
-            <input id="commonNameInput" value="" />
+            <input id="commonNameInput" type="text" value="" />
             <button id="submitCommmonName">change</button>
           </div>
           <div>
             <textarea
+              type="text"
               id="textArea"
               rows="5"
               cols="50"

@@ -105,6 +105,7 @@ const makeDom = function (input) {
         elemImg.setAttribute("src", "https://" + inputArr[i].imageURL.substring(1));
         elemImg.setAttribute("class", "pictureOfOrg");
         elemImg.setAttribute("name", i);
+        elemImg.setAttribute("Alt", +"picture of " + inputArr[i].name)
         elemImg.frameSearchName = inputArr[i].name
 
         artist.setAttribute("class", "attri");
