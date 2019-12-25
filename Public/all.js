@@ -190,6 +190,22 @@ const renderSelects = function (dataObj) {
 
     })
 }
+const submitPictureURL = document.getElementById("submitPictureURL");
+submitPictureURL.addEventListener("click", async event => {
+    const nameSelector = document.getElementById("nameSelect").value;
+    const pictureURL = document.getElementById("pictureURLinput").value;
+    //let g = (dataObj[nameSelector.selectedIndex]);
+    let updateImageURL = {
+        "name": nameSelector,
+        "imageURL": pictureURL
+    }
+    const response = await updateSend(updateImageURL);
+    dbObject[document.getElementById("nameSelect").selectedIndex].imageURL = updateImageURL.imageURL;
+    document.getElementById("pictureURLinput").value = "";
+    document.getElementById("pictureURL").textContent = updateImageURL.imageURL;
+});
+
+
 
 const submitArtist = document.getElementById("submitArtist");
 submitArtist.addEventListener("click", async event => {
@@ -451,36 +467,36 @@ async function submit(dataObj) {
     return (json);
 }
 
-async function manyPost() {
-    let rejects = [];
-    for (let i = 0; i < parray.length; i++) {
-        try {
-            let f = await scrapeMany(parray[i]);
+//async function manyPost() {
+//    let rejects = [];
+//    for (let i = 0; i < parray.length; i++) {
+//        try {
+//            let f = await scrapeMany(parray[i]);
+//
+//        } catch {
+//            err => console.error(err);
+//            rejects.push(parray[i]);
+//
+//        }
+//    }
+//    console.log(rejects);
+//}
 
-        } catch {
-            err => console.error(err);
-            rejects.push(parray[i]);
 
-        }
-    }
-    console.log(rejects);
-}
-
-
-async function scrapeMany(input) {
-    const dataObj = {};
-    dataObj.name = input;
-    let picture = await scrape(dataObj);
-    dataObj.imageURL = picture.imageURL;
-    dataObj.commonName = picture.commonName;
-    let returnedDataObj = await imageAttributes(dataObj);
-
-    //  fillPage(dataObj);
-    //  fillAttr(returnedDataObj);
-    let g = submit(returnedDataObj);
-    return g;
-
-}
+//async function scrapeMany(input) {
+//    const dataObj = {};
+//    dataObj.name = input;
+//    let picture = await scrape(dataObj);
+//    dataObj.imageURL = picture.imageURL;
+//    dataObj.commonName = picture.commonName;
+//    let returnedDataObj = await imageAttributes(dataObj);
+//
+//    //  fillPage(dataObj);
+//    //  fillAttr(returnedDataObj);
+//    let g = submit(returnedDataObj);
+//    return g;
+//
+//}
 
 
 const update = document.getElementById("updateDb");
@@ -526,6 +542,8 @@ async function updateDb() {
 //   }
 //});
 
+
+/// CODE BELOW FOR ADDING IFRAME OR NEW TAB FOR SELECTED PLANT
 document
     .querySelector("body")
     .addEventListener("click", function (event) {
@@ -551,12 +569,8 @@ document
 function checkForIphone(namePass) {
     let url = `https://en.wikipedia.org/wiki/${namePass}`;
     if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-
         openAndReuseOneTabPerAttribute("myextension-myattribute", url);
-        //do nothing its an iphone some code
-    } // some code..
-    else {
-        //  openAndReuseOneTabPerAttribute("myextension-myattribute", url);
+    } else {
         iframeFromPic(namePass);
     }
 }
@@ -621,4 +635,3 @@ function openAndReuseOneTabPerAttribute(attrName, url) {
     };
 
 }
-// hey();
