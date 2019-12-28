@@ -53,6 +53,25 @@ select {
     background-color: lightgray;
 }
 
+.showInfoText {
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space: pre-line;
+    max-height: 1.2em;
+    /* (Number of lines you want visible) * (line-height) */
+    line-height: 1.2em;
+    color: lightslategray;
+}
+
+.showInfoText:hover {
+    color: lightgrey;
+    background-color: rgba(165, 42, 42, 0.411);
+    overflow: visible;
+    max-height: 9.6em;
+    text-align: center;
+}
 
 .sp_picturesDiv {
     display: inline-block;
@@ -90,7 +109,7 @@ select {
     display: inline-block;
     top: 0;
     background: black;
-    color: red;
+    color: grey;
     margin-top: 0;
     padding-left: 5px;
     width: 97vw;

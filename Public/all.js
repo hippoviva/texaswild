@@ -81,7 +81,7 @@ async function dataFind() {
     return arrayofData;
 };
 
-const makeDom = function (input) {
+function makeDom(input) {
     const myDiv = document.getElementById("myDiv");
     const inputArr = input;
     for (let i = 0; i < inputArr.length; i++) {
@@ -101,6 +101,10 @@ const makeDom = function (input) {
         const elemName = document.createElement("p");
         const elemCommonName = document.createElement("p");
         const artist = document.createElement("p");
+        const info = document.createElement("p");
+        info.textContent = "Additional Info:\r\n" + inputArr[i].descriptionText;
+        info.setAttribute("class", "showInfoText");
+
 
         elemImg.setAttribute("src", "https://" + inputArr[i].imageURL.substring(1));
         elemImg.setAttribute("class", "pictureOfOrg");
@@ -139,13 +143,17 @@ const makeDom = function (input) {
         }
         root.appendChild(elemCommonName);
         root.appendChild(elemName);
+
+        if (inputArr[i].descriptionText != undefined) {
+            root.appendChild(info)
+        };
         myDiv.appendChild(root);
         sleep("4");
 
     }
 }
 
-const sleep = function (milliseconds) {
+function sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
         if (new Date().getTime() - start > milliseconds) {
@@ -158,9 +166,6 @@ const sleep = function (milliseconds) {
 
 ///below here is the edit code
 
-
-//const loadData = document.getElementById("loadData");
-//loadData.addEventListener("click", async event => {
 
 function loadOp(json) {
     json.sort(function (a, b) {
@@ -179,7 +184,7 @@ function loadOp(json) {
     renderSelects(selects)
 }
 
-const renderSelects = function (dataObj) {
+function renderSelects(dataObj) {
     const nameSelector = document.getElementById("nameSelect");
     nameSelector.addEventListener("change", event => {
 
@@ -270,7 +275,6 @@ async function scrapeOne() {
 
     fillPage(dataObj);
     fillAttr(returnedDataObj);
-    //  submit(returnedDataObj);
 }
 
 
@@ -293,7 +297,7 @@ async function scrape(dataObj) {
 
 }
 
-const fillPage = function (dataObj) {
+function fillPage(dataObj) {
     const scienName = document.getElementById("scienName")
     scienName.textContent = dataObj.name;
 
@@ -397,7 +401,8 @@ function imageAttr(json) {
     return (attrObj);
 
 }
-const fillAttr = function (input) {
+
+function fillAttr(input) {
 
     const artistName = document.getElementById("artistName");
     artistName.textContent = input.artist;
