@@ -49,6 +49,7 @@ select {
 }
 
 .master {
+    padding-top: 1em;
     text-align: center;
     background-color: lightgray;
 }
@@ -174,4 +175,14 @@ select {
     height: 60vh;
     border: 3px solid #73AD21;
     z-index: 30;
+}
+
+#textArea {
+    width: 90%;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#pictureURL {
+    word-wrap: break-word;
 }

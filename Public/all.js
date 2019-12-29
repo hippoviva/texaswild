@@ -104,6 +104,7 @@ function makeDom(input) {
         const info = document.createElement("p");
         info.textContent = "Additional Info:\r\n" + inputArr[i].descriptionText;
         info.setAttribute("class", "showInfoText");
+        info.setAttribute("onclick", "");
 
 
         elemImg.setAttribute("src", "https://" + inputArr[i].imageURL.substring(1));
@@ -136,7 +137,7 @@ function makeDom(input) {
 
         } else {
             const a = document.createElement('a');
-            a.setAttribute("href", inputArr[i].licenceUrl)
+            a.setAttribute("href", inputArr[i].licenseURL);
             a.textContent = inputArr[i].license;
             a.setAttribute("class", "attri");
             artist.appendChild(a);
@@ -314,9 +315,11 @@ function fillPage(dataObj) {
     const descriptionText = document.getElementById("textArea");
     if (dataObj.hasOwnProperty("descriptionText")) {
         descriptionText.value = dataObj.descriptionText;
+
     } else {
         descriptionText.value = "write something"
     }
+
 }
 
 async function imageAttributes(dataObj) {
@@ -417,7 +420,9 @@ function fillAttr(input) {
 
         const a = document.createElement('a');
         const g = (input.licenseURL);
-        a.setAttribute("href", g); //input.licenseURL)
+        a.setAttribute("href", g);
+        console.log(g);
+        //input.licenseURL)
         a.textContent = input.license;
         a.setAttribute("class", "attri");
         license.textContent = "";
