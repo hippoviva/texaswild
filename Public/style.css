@@ -1,13 +1,9 @@
-.ps {
-    margin: 0;
-}
-
 html {
     background-color: black;
 }
 
-h2 {
-    color: white;
+h3 {
+    color: lightgray;
     display: block;
     text-align: center;
     margin-top: 3px;
@@ -44,8 +40,8 @@ select {
     margin-top: 90px;
 }
 
-.select-wrapper {
-    text-align: center;
+.ps {
+    margin: 0;
 }
 
 .master {
@@ -53,6 +49,11 @@ select {
     text-align: center;
     background-color: lightgray;
 }
+
+.select-group:hover {
+    font-size: 16px;
+}
+
 
 .showInfoText {
     position: relative;
@@ -154,9 +155,6 @@ select {
     display: none;
 }
 
-#editView {
-    margin-top: 7em;
-}
 
 .item {
     width: 10em;
@@ -167,11 +165,15 @@ select {
     z-index: 20;
 }
 
+#editView {
+    margin-top: 7em;
+}
+
 #iframe1 {
     position: fixed;
     top: 20vh;
     left: 5vw;
-    width: 80%;
+    width: 90%;
     height: 60vh;
     border: 3px solid #73AD21;
     z-index: 30;

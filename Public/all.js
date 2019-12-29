@@ -142,12 +142,13 @@ function makeDom(input) {
             a.setAttribute("class", "attri");
             artist.appendChild(a);
         }
-        root.appendChild(elemCommonName);
-        root.appendChild(elemName);
 
         if (inputArr[i].descriptionText != undefined) {
             root.appendChild(info)
         };
+        root.appendChild(elemCommonName);
+        root.appendChild(elemName);
+
         myDiv.appendChild(root);
         sleep("4");
 
