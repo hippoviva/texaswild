@@ -4,6 +4,13 @@ const Datastore = require("nedb");
 const cheerio = require("cheerio");
 const fetch = require("node-fetch");
 require("dotenv").config();
+const Filter = require('bad-words'),
+    filter = new Filter();
+
+console.log(filter.clean("Don't be an ash0le")); //Don't be an ******
+
+
+
 
 app.use(express.static("public"));
 app.use(
@@ -124,26 +131,31 @@ app.post("/update", (request, response) => {
         console.log("update Request")
         const updateResponse = update(request.body);
         response.json(updateResponse);
+        //  console.log(updateResponse);
+
     } catch (error) {
         console.log(error);
     }
 });
 
-const update = async function (req) {
+const update = function (req) {
     const selection = Object.keys(req)[1];
+    const text = (filter.clean(req[selection]))
+
 
     database.update({
         name: req.name
     }, {
         $set: {
-            [selection]: req[selection]
+            [selection]: text
         }
     }, {
         multi: false
     }, function (err, numReplaced) {
         //        console.log(numReplaced);
     })
-    return ("success");
+    return (text);
+
 };
 
 

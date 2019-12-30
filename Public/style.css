@@ -99,6 +99,8 @@ select {
 
 .attri {
     font-size: 75%;
+    color: white;
+    background-color: black;
     white-space: nowrap;
     color: white;
     text-align: center;
@@ -121,6 +123,7 @@ select {
 
 }
 
+/*
 .header2 {
     text-align: center;
     background-color: black;
@@ -128,14 +131,14 @@ select {
     position: fixed;
     width: 97vw;
 }
-
+*/
 
 .links {
     color: white;
 }
 
 
-/* Page content */
+/* Page content all the pictures on main page */
 .content {
     display: grid;
     padding: 0px;
@@ -155,15 +158,17 @@ select {
     display: none;
 }
 
-
+/*
 .item {
     width: 10em;
 }
-
+*/
+/*
 .new {
     position: relative;
     z-index: 20;
 }
+*/
 
 #editView {
     margin-top: 7em;
@@ -181,6 +186,8 @@ select {
 
 #textArea {
     width: 90%;
+    font-size: 16px;
+    font-family: Times;
     padding-left: 1em;
     padding-right: 1em;
 }
