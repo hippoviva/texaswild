@@ -4,7 +4,6 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
-  <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,64 +14,80 @@
   </head>
 
   <body>
-    
-    <div id="inputMasterDiv" class = "displayClass">
-    <h2>Texas Wildlife</h2>
-    <div>
-      <button id="scrape"  class = "displayClass">Scrape</button>
-    </div>
-    <div class = "displayClass">
-     <button id="updateDb">Update</button>
-    </div>
+    <div id="inputMasterDiv" class="displayClass">
+      <h2>Texas Wildlife</h2>
+      <div>
+        <button id="scrape" class="displayClass">Scrape</button>
+      </div>
 
-    <div class = "displayClass">
-      <button id="loadData" class="updatebtn">Load Data</button>
-    </div>
-    <div>
-      <input id="sciname" value="Ovis canadensis" />
-      <button id="submit" class = "displayClass">submit</button>
+      <div class="displayClass">
+        <button id="updateDb">Update</button>
+      </div>
+
+      <div class="displayClass">
+        <button id="loadData" class="updatebtn">Load Data</button>
+      </div>
+
+      <div>
+        <input id="sciname" value="Ovis canadensis" />
+        <button id="submit" class="displayClass">submit</button>
+      </div>
     </div>
 
     <select id="nameSelect" class="select-group"> </select>
+
     <div class="master">
-      <div id = "mainPopPic"></div>
-    <div id="pictureDiv">
-      <img id="picture" />
+      <div id="mainPopPic"></div>
+
+      <div id="pictureDiv">
+        <img id="picture" />
+      </div>
+
+      <div>
+        <span id="scienName">hi</span>
+      </div>
+
+      <div class="displayClass">
+        <p id="pictureURL" class="ps"></p>
+        <input id="pictureURLinput" value="" />
+        <button id="submitPictureURL">change</button>
+      </div>
+
+      <div>
+        <span>Artist: </span>
+        <span id="artistName" class="ps"></span>
+        <input id="artistInput" value="" />
+        <button id="submitArtist" class="updatebtn">change</button>
+      </div>
+
+      <div>
+        <span>License: </span>
+        <span id="license" class="ps"><a id="a"></a></span>
+        <input id="licenseInput" value="" class="displayClass" />
+        <button id="submitLicense" class="displayClass">change</button>
+      </div>
+
+      <div>
+        <span>Common Name: </span>
+        <span id="commonName" class="ps"></span>
+        <input id="commonNameInput" value="" />
+        <button id="submitCommmonName">change</button>
+      </div>
+
+      <div>
+        <textarea
+          id="textArea"
+          rows="5"
+          cols="50"
+          minlength="10"
+          maxlength="255"
+        >
+Write something here
+        </textarea>
+        <button id="submitText">change</button>
+      </div>
     </div>
-    <div><span id="scienName">hi</span></div>
-     
-    <div class = "displayClass">
-      
-    <p id="pictureURL" class="ps"></p>
-      <input id="pictureURLinput" value="" />
-      <button id="submitPictureURL">change</button>
-    
-    </div>
-    <div><span>Artist: </span>
-      <span id="artistName" class="ps"></span>
-      <input id="artistInput" value="" />
-      <button id="submitArtist" class="updatebtn">change</button>
-    </div>
-    <div>
-      <span>License: </span>
-      <span id="license" class="ps"><a id="a"></a></span>
-      <input id="licenseInput" value="" class="displayClass" />
-      <button id="submitLicense" class="displayClass">change</button>
-    </div>
-    <div><span>Common Name: </span>
-      <span id="commonName" class="ps"></span>
-      <input id="commonNameInput" value="" />
-      <button id="submitCommmonName">change</button>
-    </div>
-    <div>
-    
-    <textarea id="textArea"
-   rows="5" cols="50"
-   minlength="10" maxlength="255">Write something here</textarea>
-  
-   <button id="submitText">change</button> 
-  </div>
-  </div>
-   <script src="sketch.js"></script>
+
+    <script src="sketch.js"></script>
   </body>
 </html>

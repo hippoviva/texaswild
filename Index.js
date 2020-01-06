@@ -7,7 +7,6 @@ require("dotenv").config();
 const Filter = require('bad-words'),
     filter = new Filter();
 
-console.log(filter.clean("Don't be an ash0le")); //Don't be an ******
 
 
 
@@ -131,7 +130,6 @@ app.post("/update", (request, response) => {
         console.log("update Request")
         const updateResponse = update(request.body);
         response.json(updateResponse);
-        //  console.log(updateResponse);
 
     } catch (error) {
         console.log(error);
@@ -141,20 +139,17 @@ app.post("/update", (request, response) => {
 const update = function (req) {
     const selection = Object.keys(req)[1];
     const text = (filter.clean(req[selection]))
-
-
+    const text2 = req[selection];
     database.update({
         name: req.name
     }, {
         $set: {
-            [selection]: text
+            [selection]: text2
         }
     }, {
         multi: false
-    }, function (err, numReplaced) {
-        //        console.log(numReplaced);
-    })
-    return (text);
+    }, function (err, numReplaced) {})
+    return (text2);
 
 };
 

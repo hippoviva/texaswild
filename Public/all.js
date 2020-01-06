@@ -4,11 +4,12 @@ const toggleView = document.getElementById("toggleView");
 toggleView.addEventListener("click", event => {
   if (toggleView.textContent == "Edit") {
     let code2 = window.prompt("Enter Admin Passcode", "1234");
-    if (code2 === "pppp") {
+    if (code2 === "1234") {
       toggleView.textContent = "Main";
       document.getElementById("masterView").className = "displayClass";
       document.getElementById("editView").className = "";
       document.getElementById("onOffSelect").className = "displayClass";
+      scrapeOne();
     } else {
       window.alert("That was not correct");
     }
@@ -19,7 +20,7 @@ toggleView.addEventListener("click", event => {
     document.getElementById("onOffSelect").className = "";
   }
 });
-
+//IFFE to load selects
 (async function loadSelectForEdit() {
   const response = await fetch("/sciNames");
   const json = await response.json();
@@ -27,6 +28,7 @@ toggleView.addEventListener("click", event => {
   dbObject = json;
 })();
 
+//IFFE to load pictures
 (async function loadAllPictures() {
   let dBdata = await dataFind();
   dBdata.sort(function (a, b) {
@@ -71,6 +73,7 @@ async function dataFind() {
 }
 
 function makeDom(input) {
+
   const myDiv = document.getElementById("myDiv");
   const inputArr = input;
   for (let i = 0; i < inputArr.length; i++) {
@@ -135,9 +138,11 @@ function makeDom(input) {
     }
     root.appendChild(elemCommonName);
     root.appendChild(elemName);
-
-    myDiv.appendChild(root);
+    if (inputArr[i].showOrganism == "true") {} else {
+      myDiv.appendChild(root);
+    }
     sleep("4");
+
   }
 }
 //sleep is here to slow down the
@@ -151,6 +156,7 @@ function sleep(milliseconds) {
 }
 
 ///below here is the edit code
+
 
 function loadOp(json) {
   json.sort(function (a, b) {
@@ -243,6 +249,25 @@ submitText.addEventListener("click", async event => {
   document.getElementById("textArea").value = response;
 
 });
+//can't use boolean because package bad-words has an issue with boolean
+const showCheckBox = document.getElementById("showOrganism");
+showCheckBox.addEventListener("change", async event => {
+  const nameSelector = document.getElementById("nameSelect").value;
+  let showCheckBoxStatus = "";
+  if (event.target.checked) {
+    showCheckBoxStatus = "true" //Don't show
+  } else {
+    showCheckBoxStatus = "false" // Show
+  }
+  let updateShowOrganism = {
+    name: nameSelector,
+    showOrganism: showCheckBoxStatus
+  };
+  const response = await updateSend(updateShowOrganism);
+  dbObject[
+    document.getElementById("nameSelect").selectedIndex
+  ].showOrganism = response;
+});
 
 const scrapebutton = document.getElementById("scrape");
 scrapebutton.addEventListener("click", event => {
@@ -297,6 +322,12 @@ function fillPage(dataObj) {
     descriptionText.value = dataObj.descriptionText;
   } else {
     descriptionText.value = "write something";
+  }
+
+  if (dataObj.showOrganism == "true") {
+    document.getElementById("showOrganism").checked = true;
+  } else {
+    document.getElementById("showOrganism").checked = false;
   }
 }
 
@@ -441,36 +472,6 @@ async function submit(dataObj) {
   const json = await response.json();
   return json;
 }
-
-//async function manyPost() {
-//    let rejects = [];
-//    for (let i = 0; i < parray.length; i++) {
-//        try {
-//            let f = await scrapeMany(parray[i]);
-//
-//        } catch {
-//            err => console.error(err);
-//            rejects.push(parray[i]);
-//
-//        }
-//    }
-//    console.log(rejects);
-//}
-
-//async function scrapeMany(input) {
-//    const dataObj = {};
-//    dataObj.name = input;
-//    let picture = await scrape(dataObj);
-//    dataObj.imageURL = picture.imageURL;
-//    dataObj.commonName = picture.commonName;
-//    let returnedDataObj = await imageAttributes(dataObj);
-//
-//    //  fillPage(dataObj);
-//    //  fillAttr(returnedDataObj);
-//    let g = submit(returnedDataObj);
-//    return g;
-//
-//}
 
 const update = document.getElementById("updateDb");
 update.addEventListener("click", event => {
