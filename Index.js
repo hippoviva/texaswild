@@ -8,9 +8,6 @@ const Filter = require('bad-words'),
     filter = new Filter();
 
 
-
-
-
 app.use(express.static("public"));
 app.use(
     express.json({
@@ -47,14 +44,14 @@ app.use(
 const database = new Datastore("database.db");
 database.loadDatabase();
 
-
-
-app.post("/ap", async (req, res) => {
+app.post("/insert", async (req, res) => {
     try {
         console.log("add record request");
         const data = req.body;
-        database.insert(data);
-        res.json(data);
+        database.insert(data, function (err, newDoc) {
+            res.json(newDoc)
+        });
+        //res.json(data);
     } catch {
         err => console.error(err);
     }
@@ -73,7 +70,7 @@ app.post("/getwiki", async function (req, res, next) {
             .catch(err => console.error(err));
 
     } catch (error) {
-        // Passes errors into the error handler
+
         return next(error)
     }
 })
@@ -85,6 +82,9 @@ function getImage(body) {
         .find("img")
         .attr("src");
     const commonName = $(".firstHeading").text();
+    // if (imageURL = undefined) {
+    //     imageURL = "";
+    // }
     return {
         imageURL,
         commonName
@@ -144,7 +144,7 @@ const update = function (req) {
         name: req.name
     }, {
         $set: {
-            [selection]: text2
+            [selection]: text
         }
     }, {
         multi: false

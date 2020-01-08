@@ -270,20 +270,29 @@ showCheckBox.addEventListener("change", async event => {
 });
 
 const scrapebutton = document.getElementById("scrape");
-scrapebutton.addEventListener("click", event => {
+scrapebutton.addEventListener("click", async event => {
   scrapeOne();
+
 });
 
 async function scrapeOne() {
   const dataObj = {};
   dataObj.name = document.getElementById("sciname").value;
   let picture = await scrape(dataObj);
-  dataObj.imageURL = picture.imageURL;
+  if (picture.imageURL == undefined) {
+    dataObj.imageURL = "//upload.wikimedia.org/wikipedia/commons/7/74/Red_Pencil_Icon.png"
+  } else {
+    dataObj.imageURL = picture.imageURL;
+  }
+
   dataObj.commonName = picture.commonName;
-  let returnedDataObj = await imageAttributes(dataObj);
 
   fillPage(dataObj);
+
+  let returnedDataObj = await imageAttributes(dataObj);
   fillAttr(returnedDataObj);
+  //console.log(returnedDataObj);
+  return returnedDataObj;
 }
 
 async function scrape(dataObj) {
@@ -300,8 +309,14 @@ async function scrape(dataObj) {
     body: JSON.stringify(data)
   };
   const response = await fetch(api_url, options);
-  return response.json();
+  resp = await response.json();
+  console.log(resp);
+
+  //console.log(response.json(), "wikiresponse");
+  return resp;
+  //return response.json();
 }
+
 
 function fillPage(dataObj) {
   const scienName = document.getElementById("scienName");
@@ -367,6 +382,7 @@ function imageAttr(json) {
   let pagenum = Object.keys(json.query.pages);
   let licenseShort;
   //  if (attrData.hasOwnProperty('extmetadata')) {
+  //console.log(attrData.query.pages);
   if (
     attrData.query.pages[pagenum].imageinfo[0].extmetadata.LicenseShortName ==
     undefined
@@ -455,9 +471,20 @@ async function updateSend(data) {
   return json;
 }
 
-//BELOW IS ALL THE ORIGINAL FUNCTIONS FOR LARGE ADDS OF DATA
+//Below is the functions to add a newly scraped organism's data to the database.
 
-async function submit(dataObj) {
+const update = document.getElementById("updateDb");
+update.addEventListener("click", async event => {
+  let code2 = window.prompt("Input control code", "1234");
+  if (code2 === "1234") {
+    dataObj = await scrapeOne();
+    insertNewOrganismInDb(dataObj);
+  } else {
+    window.alert("That was wrong");
+  }
+});
+
+async function insertNewOrganismInDb(dataObj) {
   // const name = document.getElementById("sciname").value;
   const data = dataObj;
   const options = {
@@ -467,36 +494,29 @@ async function submit(dataObj) {
     },
     body: JSON.stringify(data)
   };
-  const api_url = "/ap";
+  const api_url = "/insert";
+  //console.log(options);
   const response = await fetch(api_url, options);
   const json = await response.json();
-  return json;
+  console.log(json);
+  //return json;
 }
 
-const update = document.getElementById("updateDb");
-update.addEventListener("click", event => {
-  let code2 = window.prompt("Input control code", "1234");
-  if (code2 === "pppp") {
-    //  updateDb()
-  } else {
-    window.alert("That was wrong");
-  }
-});
 
-async function updateDb() {
-  let rejects = [];
-  for (let i = 0; i < parray.length; i++) {
-    try {
-      let f = await updateSend({
-        name: parray[i]
-      });
-    } catch {
-      err => console.error(err);
-      rejects.push(parray[i]);
-    }
-  }
-  console.log(rejects);
-}
+//async function updateDb() {
+//  let rejects = [];
+//  for (let i = 0; i < parray.length; i++) {
+//    try {
+//      let f = await updateSend({
+//        name: parray[i]
+//      });
+//    } catch {
+//      err => console.error(err);
+//      rejects.push(parray[i]);
+//    }
+//  }
+//  console.log(rejects);
+//}
 
 //const button = document.getElementById("submit");
 //button.addEventListener("click", event => {
