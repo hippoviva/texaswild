@@ -453,7 +453,7 @@ function fillAttr(input) {
   }
 }
 
-let parray = ["Acacia angususasima", "Ambrosia artemisiifolia"];
+//let parray = ["Acacia angususasima", "Ambrosia artemisiifolia"];
 
 async function updateSend(data) {
   // const name = document.getElementById("sciname").value;
